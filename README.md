@@ -1,4 +1,6 @@
-elasticsearch-plugin-sample
+Sample plugin for elasticsearch
 ===========================
 
-A sample project for elasticsearch plugin
+This project is a sample for elasticsearch plugin.
+elasticsearch-plugin-archetype is created from this project.
+
