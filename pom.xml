@@ -16,14 +16,17 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+<!-- CODELIBS: BEGIN -->
 	<scm>
 		<connection>scm:git:git@github.com:codelibs/elasticsearch-plugin-sample.git</connection>
 		<developerConnection>scm:git:git@github.com:codelibs/elasticsearch-plugin-sample.git</developerConnection>
 		<url>https://github.com/codelibs/elasticsearch-plugin-sample</url>
 	</scm>
+<!-- CODELIBS: END -->
 	<properties>
 		<elasticsearch.version>0.90.3</elasticsearch.version>
 	</properties>
+<!-- CODELIBS: BEGIN -->
 	<distributionManagement>
 		<repository>
 			<id>codelibs-repository</id>
@@ -41,6 +44,7 @@
 			<url>http://maven.codelibs.org/</url>
 		</repository>
 	</repositories>
+<!-- CODELIBS: END -->
 	<build>
 		<plugins>
 			<plugin>
@@ -93,6 +97,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+<!-- CODELIBS: BEGIN -->
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -100,6 +105,7 @@
 				<version>2.4</version>
 			</extension>
 		</extensions>
+<!-- CODELIBS: END -->
 	</build>
 	<dependencies>
 		<dependency>
