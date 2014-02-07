@@ -1,6 +1,6 @@
 package org.codelibs.elasticsearch.sample.service;
 
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.common.component.AbstractLifecycleComponent;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.settings.Settings;
@@ -16,21 +16,21 @@ public class SampleService extends AbstractLifecycleComponent<SampleService> {
     }
 
     @Override
-    protected void doStart() throws ElasticSearchException {
+    protected void doStart() throws ElasticsearchException {
         logger.info("START SampleService");
 
         // TODO Your code..
     }
 
     @Override
-    protected void doStop() throws ElasticSearchException {
+    protected void doStop() throws ElasticsearchException {
         logger.info("STOP SampleService");
 
         // TODO Your code..
     }
 
     @Override
-    protected void doClose() throws ElasticSearchException {
+    protected void doClose() throws ElasticsearchException {
         logger.info("CLOSE SampleService");
 
         // TODO Your code..
