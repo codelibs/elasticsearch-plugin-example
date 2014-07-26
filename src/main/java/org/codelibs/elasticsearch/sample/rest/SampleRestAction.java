@@ -30,8 +30,8 @@ public class SampleRestAction extends BaseRestHandler {
     }
 
     @Override
-    public void handleRequest(final RestRequest request,
-            final RestChannel channel) {
+    protected void handleRequest(final RestRequest request,
+            final RestChannel channel, Client client) {
         try {
             final XContentBuilder builder = JsonXContent.contentBuilder();
             builder.startObject();
