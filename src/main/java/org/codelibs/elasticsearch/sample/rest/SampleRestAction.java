@@ -20,12 +20,12 @@ public class SampleRestAction extends BaseRestHandler {
 
     @Inject
     public SampleRestAction(final Settings settings, final Client client,
-            final RestController restController) {
-        super(settings, client);
+            final RestController controller) {
+        super(settings, controller, client);
 
-        restController.registerHandler(RestRequest.Method.GET,
+        controller.registerHandler(RestRequest.Method.GET,
                 "/{index}/{type}/_sample", this);
-        restController.registerHandler(RestRequest.Method.GET,
+        controller.registerHandler(RestRequest.Method.GET,
                 "/{index}/_sample", this);
     }
 
