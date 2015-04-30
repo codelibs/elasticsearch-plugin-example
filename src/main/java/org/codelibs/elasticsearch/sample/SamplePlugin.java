@@ -3,7 +3,6 @@ package org.codelibs.elasticsearch.sample;
 import java.util.Collection;
 
 import org.codelibs.elasticsearch.sample.module.SampleModule;
-import org.codelibs.elasticsearch.sample.module.SampleRiverModule;
 import org.codelibs.elasticsearch.sample.rest.SampleRestAction;
 import org.codelibs.elasticsearch.sample.service.SampleService;
 import org.elasticsearch.common.collect.Lists;
@@ -11,7 +10,6 @@ import org.elasticsearch.common.component.LifecycleComponent;
 import org.elasticsearch.common.inject.Module;
 import org.elasticsearch.plugins.AbstractPlugin;
 import org.elasticsearch.rest.RestModule;
-import org.elasticsearch.river.RiversModule;
 
 public class SamplePlugin extends AbstractPlugin {
     @Override
@@ -27,11 +25,6 @@ public class SamplePlugin extends AbstractPlugin {
     // for Rest API
     public void onModule(final RestModule module) {
         module.addRestAction(SampleRestAction.class);
-    }
-
-    // for River
-    public void onModule(final RiversModule module) {
-        module.registerRiver("sample", SampleRiverModule.class);
     }
 
     // for Service
