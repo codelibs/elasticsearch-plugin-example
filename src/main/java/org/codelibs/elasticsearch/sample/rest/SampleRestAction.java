@@ -27,6 +27,8 @@ public class SampleRestAction extends BaseRestHandler {
                 "/{index}/{type}/_sample", this);
         controller.registerHandler(RestRequest.Method.GET,
                 "/{index}/_sample", this);
+        controller.registerHandler(RestRequest.Method.GET,
+                "/_sample", this);
     }
 
     @Override
@@ -34,6 +36,9 @@ public class SampleRestAction extends BaseRestHandler {
             final RestChannel channel, Client client) {
         try {
             final XContentBuilder builder = JsonXContent.contentBuilder();
+            if (request.hasParam("pretty")) {
+                builder.prettyPrint().lfAtEnd();
+            }
             builder.startObject();
             builder.field("index", request.param("index"));
             builder.field("type", request.param("type"));

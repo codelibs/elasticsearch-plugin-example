@@ -15,7 +15,6 @@ import org.codelibs.elasticsearch.runner.net.CurlException;
 import org.codelibs.elasticsearch.runner.net.CurlRequest;
 import org.codelibs.elasticsearch.runner.net.CurlResponse;
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesResponse;
-import org.elasticsearch.action.count.CountResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -188,8 +187,8 @@ public class SamplePluginTests extends TestCase {
         }
 
         {
-            final CountResponse countResponse = runner.count(index, type);
-            assertEquals(1000, countResponse.getCount());
+            final SearchResponse searchResponse = runner.count(index, type);
+            assertEquals(1000, searchResponse.getHits().getTotalHits());
         }
 
         // delete 1 document
@@ -202,9 +201,6 @@ public class SamplePluginTests extends TestCase {
             assertEquals(999, searchResponse.getHits().getTotalHits());
             assertEquals(10, searchResponse.getHits().hits().length);
         }
-
-        // optimize
-        runner.optimize();
 
         // upgrade
         runner.upgrade();
