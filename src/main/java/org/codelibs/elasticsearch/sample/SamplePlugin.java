@@ -1,44 +1,31 @@
 package org.codelibs.elasticsearch.sample;
 
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
 
-import org.codelibs.elasticsearch.sample.module.SampleModule;
-import org.codelibs.elasticsearch.sample.rest.SampleRestAction;
-import org.codelibs.elasticsearch.sample.service.SampleService;
-import org.elasticsearch.common.component.LifecycleComponent;
-import org.elasticsearch.common.inject.Module;
+import org.codelibs.elasticsearch.sample.rest.RestSampleAction;
+import org.elasticsearch.cluster.metadata.IndexNameExpressionResolver;
+import org.elasticsearch.cluster.node.DiscoveryNodes;
+import org.elasticsearch.common.settings.ClusterSettings;
+import org.elasticsearch.common.settings.IndexScopedSettings;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.settings.SettingsFilter;
+import org.elasticsearch.plugins.ActionPlugin;
 import org.elasticsearch.plugins.Plugin;
-import org.elasticsearch.rest.RestModule;
+import org.elasticsearch.rest.RestController;
+import org.elasticsearch.rest.RestHandler;
 
-import com.google.common.collect.Lists;
-
-public class SamplePlugin extends Plugin {
+public class SamplePlugin extends Plugin implements ActionPlugin {
     @Override
-    public String name() {
-        return "SamplePlugin";
-    }
-
-    @Override
-    public String description() {
-        return "This is a sample plugin.";
-    }
-
-    public void onModule(final RestModule module) {
-        module.addRestAction(SampleRestAction.class);
-    }
-
-    @Override
-    public Collection<Module> nodeModules() {
-        final Collection<Module> modules = Lists.newArrayList();
-        modules.add(new SampleModule());
-        return modules;
-    }
-
-    @SuppressWarnings("rawtypes")
-    @Override
-    public Collection<Class<? extends LifecycleComponent>> nodeServices() {
-        final Collection<Class<? extends LifecycleComponent>> services = Lists.newArrayList();
-        services.add(SampleService.class);
-        return services;
+    public List<RestHandler> getRestHandlers(final Settings settings,
+            final RestController restController,
+            final ClusterSettings clusterSettings,
+            final IndexScopedSettings indexScopedSettings,
+            final SettingsFilter settingsFilter,
+            final IndexNameExpressionResolver indexNameExpressionResolver,
+            final Supplier<DiscoveryNodes> nodesInCluster) {
+        return Arrays.asList(//
+                new RestSampleAction(settings, restController));
     }
 }

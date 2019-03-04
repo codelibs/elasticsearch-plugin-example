@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codelibs</groupId>
 	<artifactId>elasticsearch-plugin-sample</artifactId>
-	<version>2.3.0-SNAPSHOT</version>
+	<version>6.6.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>elasticsearch sample plugin</description>
 	<inceptionYear>2012</inceptionYear>
@@ -24,46 +24,24 @@
 	</scm>
 <!-- CODELIBS: END -->
 	<properties>
-		<elasticsearch.version>2.3.3</elasticsearch.version>
+		<elasticsearch.version>6.6.1</elasticsearch.version>
 		<elasticsearch.plugin.classname>org.codelibs.elasticsearch.sample.SamplePlugin</elasticsearch.plugin.classname>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<log4j.version>2.11.1</log4j.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 <!-- CODELIBS: BEGIN -->
-	<distributionManagement>
-		<repository>
-			<id>codelibs-repository</id>
-			<url>ftp://maven.codelibs.org/home/codelibs/maven/</url>
-		</repository>
-		<site>
-			<id>codelibs-site</id>
-			<url>ftp://maven.codelibs.org/home/codelibs/project/elasticsearch-plugin-sample/</url>
-		</site>
-	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>codelibs.org</id>
-			<name>CodeLibs Repository</name>
-			<url>http://maven.codelibs.org/</url>
-		</repository>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-	</repositories>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
 <!-- CODELIBS: END -->
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -72,7 +50,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19</version>
+				<version>2.22.1</version>
 				<configuration>
 					<includes>
 						<include>**/*Tests.java</include>
@@ -81,7 +59,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -93,7 +71,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.6</version>
+				<version>3.1.0</version>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
 					<outputDirectory>${project.build.directory}/releases/</outputDirectory>
@@ -128,29 +106,23 @@
 			<version>${elasticsearch.version}</version>
 			<scope>provided</scope>
 		</dependency>
-<!-- CODELIBS: BEGIN -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+			<scope>provided</scope>
 		</dependency>
+<!-- CODELIBS: BEGIN -->
 		<dependency>
 			<groupId>org.codelibs</groupId>
 			<artifactId>elasticsearch-cluster-runner</artifactId>
-			<version>2.3.0.0</version>
+			<version>${elasticsearch.version}.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna</artifactId>
-			<version>4.1.0</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 <!-- CODELIBS: END -->
