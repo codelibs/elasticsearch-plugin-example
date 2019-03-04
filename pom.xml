@@ -112,7 +112,6 @@
 			<version>${log4j.version}</version>
 			<scope>provided</scope>
 		</dependency>
-<!-- CODELIBS: BEGIN -->
 		<dependency>
 			<groupId>org.codelibs</groupId>
 			<artifactId>elasticsearch-cluster-runner</artifactId>
@@ -125,6 +124,5 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-<!-- CODELIBS: END -->
 	</dependencies>
 </project>
