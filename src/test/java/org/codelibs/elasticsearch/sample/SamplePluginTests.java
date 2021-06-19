@@ -26,11 +26,10 @@ public class SamplePluginTests extends TestCase {
             public void build(final int number, final Builder settingsBuilder) {
                 settingsBuilder.put("http.cors.enabled", true);
                 settingsBuilder.put("http.cors.allow-origin", "*");
-                settingsBuilder.putList("discovery.zen.ping.unicast.hosts",
-                        "localhost:9301-9310");
+                settingsBuilder.put("discovery.type", "single-node");
             }
         }).build(newConfigs()
-                .clusterName("es-cl-run-" + System.currentTimeMillis())
+                .clusterName("es-sample-run-" + System.currentTimeMillis())
                 .pluginTypes("org.codelibs.elasticsearch.sample.SamplePlugin")
                 .numOfNode(3));
 
@@ -55,7 +54,7 @@ public class SamplePluginTests extends TestCase {
             final String content = curlResponse.getContentAsString();
             assertNotNull(content);
             final Map<String, Object> contentMap = curlResponse
-                    .getContent(EcrCurl.jsonParser);
+                    .getContent(EcrCurl.jsonParser());
             assertEquals(index, contentMap.get("index"));
             assertTrue(contentMap.get("description").toString()
                     .startsWith("This is a sample response:"));
@@ -66,7 +65,7 @@ public class SamplePluginTests extends TestCase {
             final String content = curlResponse.getContentAsString();
             assertNotNull(content);
             final Map<String, Object> contentMap = curlResponse
-                    .getContent(EcrCurl.jsonParser);
+                    .getContent(EcrCurl.jsonParser());
             assertFalse(contentMap.containsKey("index"));
             assertTrue(contentMap.get("description").toString()
                     .startsWith("This is a sample response:"));

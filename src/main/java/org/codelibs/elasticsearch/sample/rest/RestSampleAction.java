@@ -1,10 +1,13 @@
 package org.codelibs.elasticsearch.sample.rest;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 import static org.elasticsearch.rest.RestRequest.Method.GET;
 import static org.elasticsearch.rest.RestStatus.OK;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.settings.Settings;
@@ -19,10 +22,13 @@ public class RestSampleAction extends BaseRestHandler {
 
     public RestSampleAction(final Settings settings,
             final RestController controller) {
-        super(settings);
+        // nothing
+    }
 
-        controller.registerHandler(GET, "/{index}/_sample", this);
-        controller.registerHandler(GET, "/_sample", this);
+    @Override
+    public List<Route> routes() {
+        return unmodifiableList(asList(new Route(GET, "/{index}/_sample"),
+                new Route(GET, "/_sample")));
     }
 
     @Override
