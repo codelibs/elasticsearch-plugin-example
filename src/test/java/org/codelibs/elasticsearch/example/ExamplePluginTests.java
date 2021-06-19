@@ -1,4 +1,4 @@
-package org.codelibs.elasticsearch.sample;
+package org.codelibs.elasticsearch.example;
 
 import static org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner.newConfigs;
 
@@ -12,7 +12,7 @@ import org.elasticsearch.node.Node;
 
 import junit.framework.TestCase;
 
-public class SamplePluginTests extends TestCase {
+public class ExamplePluginTests extends TestCase {
 
     private ElasticsearchClusterRunner runner;
 
@@ -29,8 +29,8 @@ public class SamplePluginTests extends TestCase {
                 settingsBuilder.put("discovery.type", "single-node");
             }
         }).build(newConfigs()
-                .clusterName("es-sample-run-" + System.currentTimeMillis())
-                .pluginTypes("org.codelibs.elasticsearch.sample.SamplePlugin")
+                .clusterName("es-example-run-" + System.currentTimeMillis())
+                .pluginTypes("org.codelibs.elasticsearch.example.ExamplePlugin")
                 .numOfNode(3));
 
         // wait for yellow status
@@ -50,17 +50,17 @@ public class SamplePluginTests extends TestCase {
         final String index = "test_index";
 
         try (CurlResponse curlResponse = EcrCurl
-                .get(node, "/" + index + "/_sample").execute()) {
+                .get(node, "/" + index + "/_example").execute()) {
             final String content = curlResponse.getContentAsString();
             assertNotNull(content);
             final Map<String, Object> contentMap = curlResponse
                     .getContent(EcrCurl.jsonParser());
             assertEquals(index, contentMap.get("index"));
             assertTrue(contentMap.get("description").toString()
-                    .startsWith("This is a sample response:"));
+                    .startsWith("This is a example response:"));
         }
 
-        try (CurlResponse curlResponse = EcrCurl.get(node, "/_sample")
+        try (CurlResponse curlResponse = EcrCurl.get(node, "/_example")
                 .execute()) {
             final String content = curlResponse.getContentAsString();
             assertNotNull(content);
@@ -68,7 +68,7 @@ public class SamplePluginTests extends TestCase {
                     .getContent(EcrCurl.jsonParser());
             assertFalse(contentMap.containsKey("index"));
             assertTrue(contentMap.get("description").toString()
-                    .startsWith("This is a sample response:"));
+                    .startsWith("This is a example response:"));
         }
     }
 }

@@ -1,10 +1,10 @@
-package org.codelibs.elasticsearch.sample;
+package org.codelibs.elasticsearch.example;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.codelibs.elasticsearch.sample.rest.RestSampleAction;
+import org.codelibs.elasticsearch.example.rest.RestExampleAction;
 import org.elasticsearch.cluster.metadata.IndexNameExpressionResolver;
 import org.elasticsearch.cluster.node.DiscoveryNodes;
 import org.elasticsearch.common.settings.ClusterSettings;
@@ -16,7 +16,7 @@ import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestHandler;
 
-public class SamplePlugin extends Plugin implements ActionPlugin {
+public class ExamplePlugin extends Plugin implements ActionPlugin {
     @Override
     public List<RestHandler> getRestHandlers(final Settings settings,
             final RestController restController,
@@ -26,6 +26,6 @@ public class SamplePlugin extends Plugin implements ActionPlugin {
             final IndexNameExpressionResolver indexNameExpressionResolver,
             final Supplier<DiscoveryNodes> nodesInCluster) {
         return Arrays.asList(//
-                new RestSampleAction(settings, restController));
+                new RestExampleAction(settings, restController));
     }
 }

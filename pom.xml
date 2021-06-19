@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<name>elasticsearch-plugin-sample</name>
+	<name>elasticsearch-plugin-example</name>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codelibs</groupId>
-	<artifactId>elasticsearch-plugin-sample</artifactId>
+	<artifactId>elasticsearch-plugin-example</artifactId>
 	<version>7.13.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>elasticsearch sample plugin</description>
+	<description>elasticsearch example plugin</description>
 	<inceptionYear>2011</inceptionYear>
 	<licenses>
 		<license>
@@ -18,14 +18,14 @@
 	</licenses>
 <!-- CODELIBS: BEGIN -->
 	<scm>
-		<connection>scm:git:git@github.com:codelibs/elasticsearch-plugin-sample.git</connection>
-		<developerConnection>scm:git:git@github.com:codelibs/elasticsearch-plugin-sample.git</developerConnection>
-		<url>https://github.com/codelibs/elasticsearch-plugin-sample</url>
+		<connection>scm:git:git@github.com:codelibs/elasticsearch-plugin-example.git</connection>
+		<developerConnection>scm:git:git@github.com:codelibs/elasticsearch-plugin-example.git</developerConnection>
+		<url>https://github.com/codelibs/elasticsearch-plugin-example</url>
 	</scm>
 <!-- CODELIBS: END -->
 	<properties>
 		<elasticsearch.version>7.13.2</elasticsearch.version>
-		<elasticsearch.plugin.classname>org.codelibs.elasticsearch.sample.SamplePlugin</elasticsearch.plugin.classname>
+		<elasticsearch.plugin.classname>org.codelibs.elasticsearch.example.ExamplePlugin</elasticsearch.plugin.classname>
 		<log4j.version>2.11.1</log4j.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>

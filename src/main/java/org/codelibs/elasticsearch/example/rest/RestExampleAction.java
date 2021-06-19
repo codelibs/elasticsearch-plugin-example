@@ -1,4 +1,4 @@
-package org.codelibs.elasticsearch.sample.rest;
+package org.codelibs.elasticsearch.example.rest;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
@@ -18,22 +18,22 @@ import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestRequest;
 
-public class RestSampleAction extends BaseRestHandler {
+public class RestExampleAction extends BaseRestHandler {
 
-    public RestSampleAction(final Settings settings,
+    public RestExampleAction(final Settings settings,
             final RestController controller) {
         // nothing
     }
 
     @Override
     public List<Route> routes() {
-        return unmodifiableList(asList(new Route(GET, "/{index}/_sample"),
-                new Route(GET, "/_sample")));
+        return unmodifiableList(asList(new Route(GET, "/{index}/_example"),
+                new Route(GET, "/_example")));
     }
 
     @Override
     public String getName() {
-        return "sample_get";
+        return "example_get";
     }
 
     @Override
@@ -51,7 +51,7 @@ public class RestSampleAction extends BaseRestHandler {
                 builder.field("index", index);
             }
             builder.field("description",
-                    "This is a sample response: " + new Date().toString());
+                    "This is a example response: " + new Date().toString());
             builder.endObject();
             channel.sendResponse(new BytesRestResponse(OK, builder));
         };
