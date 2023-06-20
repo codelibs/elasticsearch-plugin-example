@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import org.elasticsearch.client.node.NodeClient;
+import org.elasticsearch.client.internal.node.NodeClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.rest.BaseRestHandler;
-import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestRequest;
+import org.elasticsearch.rest.RestResponse;
+import org.elasticsearch.xcontent.XContentBuilder;
+import org.elasticsearch.xcontent.json.JsonXContent;
 
 public class RestExampleAction extends BaseRestHandler {
 
@@ -53,7 +53,7 @@ public class RestExampleAction extends BaseRestHandler {
             builder.field("description",
                     "This is a example response: " + new Date().toString());
             builder.endObject();
-            channel.sendResponse(new BytesRestResponse(OK, builder));
+            channel.sendResponse(new RestResponse(OK, builder));
         };
     }
 

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<name>elasticsearch-plugin-example</name>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codelibs</groupId>
 	<artifactId>elasticsearch-plugin-example</artifactId>
-	<version>7.13.0-SNAPSHOT</version>
+	<version>8.8.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>elasticsearch example plugin</description>
+	<description>This is an example plugin for elasticsearch.</description>
 	<inceptionYear>2011</inceptionYear>
 	<licenses>
 		<license>
@@ -16,36 +15,30 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-<!-- CODELIBS: BEGIN -->
 	<scm>
 		<connection>scm:git:git@github.com:codelibs/elasticsearch-plugin-example.git</connection>
 		<developerConnection>scm:git:git@github.com:codelibs/elasticsearch-plugin-example.git</developerConnection>
-		<url>https://github.com/codelibs/elasticsearch-plugin-example</url>
+		<url>git@github.com:codelibs/elasticsearch-plugin-example.git</url>
 	</scm>
-<!-- CODELIBS: END -->
-	<properties>
-		<elasticsearch.version>7.13.1</elasticsearch.version>
-		<elasticsearch.plugin.classname>org.codelibs.elasticsearch.example.ExamplePlugin</elasticsearch.plugin.classname>
-		<log4j.version>2.11.1</log4j.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
-<!-- CODELIBS: BEGIN -->
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>9</version>
 	</parent>
-<!-- CODELIBS: END -->
+	<properties>
+		<elasticsearch.version>8.8.1</elasticsearch.version>
+		<elasticsearch.plugin.classname>org.codelibs.elasticsearch.example.ExamplePlugin</elasticsearch.plugin.classname>
+		<log4j.version>2.19.0</log4j.version>
+		<maven.compiler.release>17</maven.compiler.release>
+	</properties>
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
 					<encoding>UTF-8</encoding>
+					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -53,8 +46,9 @@
 				<version>2.22.2</version>
 				<configuration>
 					<includes>
-						<include>**/*Tests.java</include>
+						<include>**/*Test.java</include>
 					</includes>
+					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -70,8 +64,35 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.4.1</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<charset>UTF-8</charset>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>4.1</version>
+				<configuration>
+					<header>https://www.codelibs.org/assets/license/header.txt</header>
+					<properties>
+						<year>2022</year>
+					</properties>
+					<includes>
+						<include>src/**/*.java</include>
+					</includes>
+					<encoding>UTF-8</encoding>
+					<headerDefinitions>
+						<headerDefinition>https://www.codelibs.org/assets/license/header-definition-2.xml</headerDefinition>
+					</headerDefinitions>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.4.2</version>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
 					<outputDirectory>${project.build.directory}/releases/</outputDirectory>
@@ -89,15 +110,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-<!-- CODELIBS: BEGIN -->
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>2.4</version>
-			</extension>
-		</extensions>
-<!-- CODELIBS: END -->
 	</build>
 	<repositories>
 		<repository>
@@ -122,6 +134,18 @@
 			<artifactId>elasticsearch</artifactId>
 			<version>${elasticsearch.version}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.elasticsearch</groupId>
+					<artifactId>
+						elasticsearch-plugin-classloader
+					</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.elasticsearch</groupId>
+					<artifactId>elasticsearch-preallocate</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -138,7 +162,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
